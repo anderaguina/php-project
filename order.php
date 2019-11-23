@@ -115,9 +115,22 @@
         // Split the string into an array of characters
         $pesel_chars = str_split($pesel);
 
+
+        $birth_month_array = array($pesel_chars[2], $pesel_chars[3]);
+
+        
+        $birth_month = join("", $birth_month_array);
+
+        if ($birth_month > 12 && $birth_month < 33) {
+            $discount = 0.85;
+        } else {
+            $discount = 0.90;
+        }
+
         // Get the last character of the pesel number
         $last_digit = $pesel_chars[sizeof($pesel_chars) - 1];
         
+        $sum = 0;
 
         // -1 For staying inside the boundary of the variable and another - 1 to ignore the last digit
         for ($x = 0; $x <= sizeof($pesel_chars ) - 2; $x++) {
@@ -143,10 +156,13 @@
         };
 
         if ($last_digit == $checksum) {
-            return $price - ($price / 10);
+            return $price * $discount;
         } else {
             return $price;
         }
+    }
+    function current_century(String $pesel, int $price) {
+
     }
     
 ?>
