@@ -112,6 +112,10 @@
         if (empty($pesel)) {
             return $price;
         }
+        // Check if pesel has non number characters
+        if (!ctype_digit($pesel)) {
+            return $price;
+        }
         // Split the string into an array of characters
         $pesel_chars = str_split($pesel);
 
@@ -156,6 +160,7 @@
         };
 
         if ($last_digit == $checksum) {
+            print_r("ALWAYS EXECUTING");
             return $price * $discount;
         } else {
             return $price;
